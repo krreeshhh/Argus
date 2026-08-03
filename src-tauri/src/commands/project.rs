@@ -8,7 +8,7 @@ use std::str::FromStr;
 
 use serde::{Serialize, Deserialize};
 use crate::error::ArgusError;
-use crate::models::{Project, ProjectSummary};
+use crate::models::{Project, ProjectSummary, Graph};
 use crate::state::AppState;
 
 #[derive(Debug, Clone, Serialize, Deserialize, sqlx::FromRow)]
@@ -342,4 +342,68 @@ pub async fn project_import(
     let target_path = get_app_dir().join(format!("{}.argus", project.id));
     fs::copy(&source_path_buf, &target_path)?;
     Ok(project)
+}
+
+#[tauri::command]
+pub async fn project_add_domain(
+    project_id: String,
+    domain: String,
+    state: tauri::State<'_, AppState>,
+) -> Result<Graph, ArgusError> {
+    let pool = get_db_pool(&state, &project_id).await?;
+    let domain_trimmed = domain.trim();
+    if domain_trimmed.is_empty() {
+        return Err(ArgusError::Validation("Domain name cannot be empty".into()));
+    }
+
+    let count: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM graphs WHERE project_id = ? AND root_domain = ?")
+        .bind(&project_id)
+        .bind(domain_trimmed)
+        .fetch_one(&pool)
+        .await?;
+    if count > 0 {
+        return Err(ArgusError::Validation(format!("Domain '{}' already exists in this project", domain_trimmed)));
+    }
+
+    let now = Utc::now().to_rfc3339();
+    let graph_id = Uuid::new_v4().to_string();
+
+    // Insert new graph row
+    sqlx::query(
+        "INSERT INTO graphs (id, project_id, name, root_domain, source_scan_label, node_count, edge_count, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+    )
+    .bind(&graph_id)
+    .bind(&project_id)
+    .bind(format!("{} Graph", domain_trimmed))
+    .bind(domain_trimmed)
+    .bind("Initial")
+    .bind(1) // node_count is 1 because of root node
+    .bind(0)
+    .bind(&now)
+    .execute(&pool)
+    .await?;
+
+    // Insert Root node for this domain
+    let root_node_id = Uuid::new_v4().to_string();
+    sqlx::query(
+        "INSERT INTO nodes (id, graph_id, type, label, score, created_at) VALUES (?, ?, ?, ?, ?, ?)"
+    )
+    .bind(&root_node_id)
+    .bind(&graph_id)
+    .bind("root")
+    .bind(domain_trimmed)
+    .bind(1.0)
+    .bind(&now)
+    .execute(&pool)
+    .await?;
+
+    // Fetch and return the newly created graph
+    let graph = sqlx::query_as::<_, Graph>(
+        "SELECT id, project_id, name, root_domain, source_scan_label, node_count, edge_count, created_at FROM graphs WHERE id = ?"
+    )
+    .bind(&graph_id)
+    .fetch_one(&pool)
+    .await?;
+
+    Ok(graph)
 }

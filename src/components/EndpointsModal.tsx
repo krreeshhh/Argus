@@ -16,7 +16,9 @@ export const EndpointsModal: React.FC = () => {
 
   const [query, setQuery] = useState('');
   const [endpoints, setEndpoints] = useState<Node[]>([]);
+  const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [loadingNextPage, setLoadingNextPage] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const listRef = useRef<HTMLDivElement>(null);
@@ -26,12 +28,15 @@ export const EndpointsModal: React.FC = () => {
 
     setLoading(true);
     const delayDebounce = setTimeout(() => {
-      invoke<Node[]>('project_get_all_endpoints', {
+      invoke<{ endpoints: Node[]; total_count: number }>('project_get_all_endpoints', {
         projectId: activeProject.id,
         searchQuery: query || null,
+        offset: 0,
+        limit: 500,
       })
         .then((res) => {
-          setEndpoints(res || []);
+          setEndpoints(res?.endpoints || []);
+          setTotalCount(res?.total_count || 0);
           setLoading(false);
         })
         .catch((err) => {
@@ -91,6 +96,28 @@ export const EndpointsModal: React.FC = () => {
     }
   };
 
+  const handleScroll = async (e: React.UIEvent<HTMLDivElement>) => {
+    if (!activeProject) return;
+    const el = e.currentTarget;
+    const isAtBottom = el.scrollHeight - el.scrollTop <= el.clientHeight + 10;
+    if (isAtBottom && !loadingNextPage && endpoints.length < totalCount) {
+      setLoadingNextPage(true);
+      try {
+        const res = await invoke<{ endpoints: Node[]; total_count: number }>('project_get_all_endpoints', {
+          projectId: activeProject.id,
+          searchQuery: query || null,
+          offset: endpoints.length,
+          limit: 500,
+        });
+        setEndpoints((prev) => [...prev, ...(res?.endpoints || [])]);
+      } catch (err) {
+        console.error('Failed to load more project endpoints:', err);
+      } finally {
+        setLoadingNextPage(false);
+      }
+    }
+  };
+
   const getStatusColor = (code: number | null | undefined) => {
     if (!code) return '#6c7086';
     if (code >= 200 && code < 300) return '#a6e3a1'; // Live green
@@ -146,7 +173,7 @@ export const EndpointsModal: React.FC = () => {
                 fontFamily: 'monospace',
               }}
             >
-              {loading ? 'loading...' : `${endpoints.length} found`}
+              {loading ? 'loading...' : `${totalCount} found`}
             </span>
           </div>
           <button
@@ -190,6 +217,7 @@ export const EndpointsModal: React.FC = () => {
 
         <div
           ref={listRef}
+          onScroll={handleScroll}
           style={{
             maxHeight: '350px',
             overflowY: 'auto',
@@ -287,6 +315,19 @@ export const EndpointsModal: React.FC = () => {
                 </div>
               </div>
             ))
+          )}
+          {loadingNextPage && (
+            <div
+              style={{
+                color: '#89b4fa',
+                fontSize: '10px',
+                padding: '8px',
+                textAlign: 'center',
+                fontFamily: 'monospace',
+              }}
+            >
+              loading more...
+            </div>
           )}
         </div>
         <div

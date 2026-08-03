@@ -57,8 +57,10 @@ interface ArgusState {
   saveProject: () => Promise<void>;
   exportProject: (targetPath: string) => Promise<void>;
   importProject: (sourcePath: string) => Promise<Project>;
+  addProjectDomain: (domain: string) => Promise<void>;
   
   toggleGraphSelection: (graphId: string) => void;
+  selectSingleGraph: (graphId: string) => Promise<void>;
   loadSelectedGraphs: () => Promise<void>;
 
   importFile: (path: string, tool: ReconTool) => Promise<ImportSummary>;
@@ -286,6 +288,30 @@ export const useArgusStore = create<ArgusState>((set, get) => ({
     }
   },
 
+  addProjectDomain: async (domain) => {
+    const { activeProject, selectedGraphIds } = get();
+    if (!activeProject) throw new Error('No active project');
+
+    useImportStore.getState().startImport(`Adding Domain: ${domain}`);
+    useImportStore.getState().setProgress({ phase: 'loading', percent: 50 });
+
+    try {
+      const newGraph = await safeInvoke<Graph>('project_add_domain', {
+        projectId: activeProject.id,
+        domain,
+      });
+
+      const nextGraphIds = [...selectedGraphIds, newGraph.id];
+      set({ selectedGraphIds: nextGraphIds });
+
+      await get().loadSelectedGraphs();
+    } catch (err) {
+      console.error('Failed to add domain:', err);
+      useImportStore.getState().failImport(String(err));
+      throw err;
+    }
+  },
+
   deleteProject: async (projectId) => {
     try {
       await safeInvoke('project_delete', { projectId });
@@ -312,6 +338,16 @@ export const useArgusStore = create<ArgusState>((set, get) => ({
     useImportStore.getState().startImport('Filter: Applying Filter Criteria');
     useImportStore.getState().setProgress({ phase: 'loading', percent: 70 });
     get().loadSelectedGraphs();
+  },
+
+  selectSingleGraph: async (graphId) => {
+    const { activeProject } = get();
+    if (!activeProject) return;
+
+    set({ selectedGraphIds: [graphId] });
+    useImportStore.getState().startImport('Filter: Applying Filter Criteria');
+    useImportStore.getState().setProgress({ phase: 'loading', percent: 70 });
+    await get().loadSelectedGraphs();
   },
 
   loadSelectedGraphs: async () => {

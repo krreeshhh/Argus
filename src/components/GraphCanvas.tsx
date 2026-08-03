@@ -730,12 +730,6 @@ export const GraphCanvas: React.FC = () => {
   }, [minimapOpen, cyInstance, activeProject]);
 
   const runLayout = (cy: cytoscape.Core, layoutName: string) => {
-    const rootNode = cy.nodes('[type = "root"]').first();
-    if (rootNode.length > 0) {
-      rootNode.position({ x: cy.width() / 2, y: cy.height() / 2 });
-      rootNode.lock();
-    }
-
     if (cy.nodes().length <= 1) {
       const importState = useImportStore.getState();
       if (importState.isImporting) {
@@ -747,15 +741,22 @@ export const GraphCanvas: React.FC = () => {
       return;
     }
 
-    let layoutConfig: any = { name: layoutName, animate: true, animationDuration: 400 };
+    // Find all distinct graph IDs of visible nodes
+    const graphIds = Array.from(new Set(
+      cy.nodes(':visible')
+        .map((n) => n.data('nodeData')?.graph_id)
+        .filter(Boolean)
+    )) as string[];
 
     const nodeCount = cy.nodes().length;
     const isMediumOrLarge = nodeCount > 600;
 
+    let baseLayoutConfig: any = { name: layoutName, animate: true, animationDuration: 400 };
+
     if (layoutName === 'cola') {
-      layoutConfig = {
+      baseLayoutConfig = {
         name: 'cola',
-        animate: true, // Always animate to prevent main thread blocking
+        animate: true,
         animationDuration: 300,
         randomize: false,
         fit: false,
@@ -765,7 +766,7 @@ export const GraphCanvas: React.FC = () => {
         maxSimulationTime: 2000,
       };
     } else if (layoutName === 'dagre') {
-      layoutConfig = {
+      baseLayoutConfig = {
         name: 'dagre',
         rankDir: 'TB',
         nodeSep: 100,
@@ -775,7 +776,7 @@ export const GraphCanvas: React.FC = () => {
         padding: 50,
       };
     } else if (layoutName === 'breadthfirst') {
-      layoutConfig = {
+      baseLayoutConfig = {
         name: 'breadthfirst',
         directed: true,
         circle: false,
@@ -785,37 +786,92 @@ export const GraphCanvas: React.FC = () => {
         padding: 50,
       };
     } else if (layoutName === 'circle') {
-      layoutConfig = { name: 'circle', fit: false, padding: 50 };
+      baseLayoutConfig = { name: 'circle', fit: false, padding: 50 };
     } else if (layoutName === 'grid') {
-      layoutConfig = { name: 'grid', fit: false, padding: 50 };
+      baseLayoutConfig = { name: 'grid', fit: false, padding: 50 };
     } else if (layoutName === 'preset') {
-      layoutConfig = { name: 'preset', fit: false, padding: 50 };
+      baseLayoutConfig = { name: 'preset', fit: false, padding: 50 };
     }
 
-    const l = cy.layout(layoutConfig);
+    const N = Math.max(1, graphIds.length);
+    let completedLayouts = 0;
 
-    l.on('layoutstop', () => {
-      cy.fit(cy.elements(':visible'), 60);
-      const importState = useImportStore.getState();
-      if (importState.isImporting && importState.phase === 'rendering') {
-        // Set to 98% representing Step 8 (Finalizing paint & rendering canvas)
-        useImportStore.getState().setProgress({ phase: 'rendering', percent: 98 });
+    const onLayoutStop = () => {
+      completedLayouts++;
+      if (completedLayouts === N) {
+        // Fit view to all visible elements once all graph layouts are complete
+        cy.fit(cy.elements(':visible'), 60);
 
-        // Wait 600ms to allow canvas paint, zoom settling, and minimap drawings to stabilize
-        setTimeout(() => {
-          requestAnimationFrame(() => {
-            useImportStore.getState().setProgress({ phase: 'done', percent: 100 });
-          });
-        }, 600);
+        const importState = useImportStore.getState();
+        if (importState.isImporting && importState.phase === 'rendering') {
+          useImportStore.getState().setProgress({ phase: 'rendering', percent: 98 });
+          setTimeout(() => {
+            requestAnimationFrame(() => {
+              useImportStore.getState().setProgress({ phase: 'done', percent: 100 });
+            });
+          }, 600);
+        }
+        setLayoutChanging(false);
       }
-      setLayoutChanging(false);
-    });
+    };
 
     const importState = useImportStore.getState();
     if (importState.isImporting && importState.phase === 'rendering') {
       importState.setProgress({ percent: 90 });
     }
-    l.run();
+
+    if (graphIds.length <= 1) {
+      // Single graph, run layout on all elements
+      const rootNode = cy.nodes('[type = "root"]').first();
+      if (rootNode.length > 0) {
+        rootNode.position({ x: cy.width() / 2, y: cy.height() / 2 });
+        rootNode.lock();
+      }
+      const l = cy.layout({ ...baseLayoutConfig, fit: false });
+      l.on('layoutstop', onLayoutStop);
+      l.run();
+    } else {
+      // Multiple graphs, run layout on each graph independently in side-by-side bounding boxes
+      const centerX = cy.width() / 2;
+      const centerY = cy.height() / 2;
+      const boxWidth = 6000;
+      const boxHeight = 4000;
+      const horizontalStep = 9000; // 6000 width + 3000 spacing gap
+
+      graphIds.forEach((graphId, i) => {
+        const xOffset = centerX + (i - (N - 1) / 2) * horizontalStep;
+        const yOffset = centerY;
+
+        const boundingBox = {
+          x1: xOffset - boxWidth / 2,
+          y1: yOffset - boxHeight / 2,
+          x2: xOffset + boxWidth / 2,
+          y2: yOffset + boxHeight / 2,
+          w: boxWidth,
+          h: boxHeight
+        };
+
+        const nodesInGraph = cy.nodes().filter((node) => node.data('nodeData')?.graph_id === graphId);
+        const nodesCollection = cy.collection(nodesInGraph);
+        const edgesInGraph = nodesCollection.connectedEdges();
+        const elementsInGraph = nodesCollection.union(edgesInGraph);
+
+        // Position and lock the root node of this graph at the center of its bounding box
+        const rootNode = nodesCollection.filter('[type = "root"]').first();
+        if (rootNode.length > 0) {
+          (rootNode as any).position({ x: xOffset, y: yOffset });
+          (rootNode as any).lock();
+        }
+
+        const l = elementsInGraph.layout({
+          ...baseLayoutConfig,
+          boundingBox,
+          fit: false
+        });
+        l.on('layoutstop', onLayoutStop);
+        l.run();
+      });
+    }
   };
 
   const handleOpenNode = () => {
@@ -1089,7 +1145,7 @@ export const GraphCanvas: React.FC = () => {
                     <>
                       No workspaces found.
                       <div style={{ marginTop: '6px', color: '#89b4fa' }}>
-                        Create a project in the left panel to begin.
+                        Create a project to begin.
                       </div>
                     </>
                   ) : (

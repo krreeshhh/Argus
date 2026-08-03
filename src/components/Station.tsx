@@ -12,6 +12,11 @@ export const Station: React.FC = () => {
     closeProject,
     deleteProject,
     importFolder,
+    availableGraphs,
+    selectedGraphIds,
+    toggleGraphSelection,
+    addProjectDomain,
+    selectSingleGraph,
   } = useArgusStore();
 
   const [newName, setNewName] = useState('');
@@ -19,6 +24,7 @@ export const Station: React.FC = () => {
   const [dragOver, setDragOver] = useState(false);
   const [importStatus, setImportStatus] = useState<string | null>(null);
   const [hoveredRecentId, setHoveredRecentId] = useState<string | null>(null);
+  const [hoveredGraphId, setHoveredGraphId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchRecentProjects();
@@ -33,6 +39,17 @@ export const Station: React.FC = () => {
       setNewDomain('');
     } catch (err) {
       alert('Failed to create project: ' + String(err));
+    }
+  };
+
+  const handleAddDomain = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newDomain.trim()) return;
+    try {
+      await addProjectDomain(newDomain.trim());
+      setNewDomain('');
+    } catch (err) {
+      alert('Failed to add domain: ' + String(err));
     }
   };
 
@@ -131,30 +148,133 @@ export const Station: React.FC = () => {
         STATION
       </div>
 
-      {/* PROJECT */}
+      {/* DOMAINS / PROJECT */}
       <div>
-        <div style={headerStyle}>PROJECT</div>
-        <form onSubmit={handleCreate} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-          <input
-            type="text"
-            placeholder="Project name"
-            value={newName}
-            onChange={(e) => setNewName(e.target.value)}
-            style={inputStyle}
-          />
-          <div style={{ display: 'flex', gap: '4px' }}>
+        <div style={headerStyle}>{activeProject ? 'DOMAINS' : 'PROJECT'}</div>
+        {activeProject ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <form onSubmit={handleAddDomain} style={{ display: 'flex', gap: '4px' }}>
+              <input
+                type="text"
+                placeholder="domain.com"
+                value={newDomain}
+                onChange={(e) => setNewDomain(e.target.value)}
+                style={inputStyle}
+              />
+              <button type="submit" style={{ ...buttonStyle, color: '#89b4fa', whiteSpace: 'nowrap' }}>
+                [+ADD]
+              </button>
+            </form>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', marginTop: '4px' }}>
+              {availableGraphs.map((g) => {
+                const isSelected = selectedGraphIds.includes(g.id);
+                const isHovered = hoveredGraphId === g.id;
+                return (
+                  <div
+                    key={g.id}
+                    onMouseEnter={() => setHoveredGraphId(g.id)}
+                    onMouseLeave={() => setHoveredGraphId(null)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      padding: '3px 4px',
+                      borderRadius: '2px',
+                      backgroundColor: isHovered ? '#1e1e2e' : 'transparent',
+                      transition: 'background-color 0.15s ease',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    <label
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        cursor: 'pointer',
+                        color: isSelected ? '#cdd6f4' : '#6c7086',
+                        fontSize: '11px',
+                        fontFamily: 'monospace',
+                        userSelect: 'none',
+                        overflow: 'hidden',
+                        flex: 1,
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={isSelected}
+                        onChange={() => toggleGraphSelection(g.id)}
+                        style={{
+                          cursor: 'pointer',
+                          accentColor: '#89b4fa',
+                          margin: 0,
+                        }}
+                      />
+                      <span
+                        style={{
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                        }}
+                        title={g.root_domain}
+                      >
+                        {g.root_domain}
+                      </span>
+                      <span style={{ color: '#585b70', fontSize: '9px', flexShrink: 0 }}>
+                        ({g.node_count}n)
+                      </span>
+                    </label>
+
+                    {isHovered && (
+                      <span
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          selectSingleGraph(g.id);
+                        }}
+                        style={{
+                          color: '#89b4fa',
+                          fontSize: '9px',
+                          cursor: 'pointer',
+                          fontWeight: 'bold',
+                          flexShrink: 0,
+                          padding: '0 2px',
+                          backgroundColor: '#313244',
+                          borderRadius: '2px',
+                        }}
+                        title={`View only ${g.root_domain}`}
+                      >
+                        only
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ) : (
+          <form onSubmit={handleCreate} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
             <input
               type="text"
-              placeholder="root-domain.com"
-              value={newDomain}
-              onChange={(e) => setNewDomain(e.target.value)}
+              placeholder="Project name"
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
               style={inputStyle}
             />
-            <button type="submit" style={{ ...buttonStyle, color: '#89b4fa', whiteSpace: 'nowrap' }}>
-              [+ADD]
-            </button>
-          </div>
-        </form>
+            <div style={{ display: 'flex', gap: '4px' }}>
+              <input
+                type="text"
+                placeholder="root-domain.com"
+                value={newDomain}
+                onChange={(e) => setNewDomain(e.target.value)}
+                style={inputStyle}
+              />
+              <button type="submit" style={{ ...buttonStyle, color: '#89b4fa', whiteSpace: 'nowrap' }}>
+                [+ADD]
+              </button>
+            </div>
+          </form>
+        )}
       </div>
 
       {/* RECENT */}

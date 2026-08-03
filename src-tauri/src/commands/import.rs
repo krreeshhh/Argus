@@ -1165,6 +1165,18 @@ async fn insert_records_single_project(
         .map(|(label, id, score)| (label, (id, score)))
         .collect();
 
+    let existing_technologies: Vec<(String, String)> = sqlx::query_as(
+        "SELECT label, id FROM nodes WHERE graph_id = ? AND type = 'technology'"
+    )
+    .bind(target_graph_id)
+    .fetch_all(&mut **tx)
+    .await?;
+
+    let mut tech_cache: std::collections::HashMap<String, String> = existing_technologies
+        .into_iter()
+        .map(|(label, id)| (label.to_lowercase(), id))
+        .collect();
+
     let mut imported = 0;
 
     for rec in records {
@@ -1295,16 +1307,10 @@ async fn insert_records_single_project(
 
                 for t in tech {
                     let tech_id = Uuid::new_v4().to_string();
-                    let existing_tech: Option<String> = sqlx::query_scalar(
-                        "SELECT id FROM nodes WHERE graph_id = ? AND type = 'technology' AND label = ? LIMIT 1"
-                    )
-                    .bind(target_graph_id)
-                    .bind(&t)
-                    .fetch_optional(&mut **tx)
-                    .await?;
+                    let t_lower = t.to_lowercase();
 
-                    let target_tech_id = if let Some(tid) = existing_tech {
-                        tid
+                    let target_tech_id = if let Some(tid) = tech_cache.get(&t_lower) {
+                        tid.clone()
                     } else {
                         sqlx::query(
                             "INSERT INTO nodes (id, graph_id, type, label, found_by, score, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)"
@@ -1318,6 +1324,7 @@ async fn insert_records_single_project(
                         .bind(now)
                         .execute(&mut **tx)
                         .await?;
+                        tech_cache.insert(t_lower, tech_id.clone());
                         tech_id
                     };
 
@@ -1386,16 +1393,21 @@ async fn insert_records_single_project(
                 let parsed_host = extract_host_from_url(&matched_at);
                 let norm_host = normalize_hostname(&parsed_host);
 
-                let parent_node: Option<String> = sqlx::query_scalar(
-                    "SELECT id FROM nodes WHERE graph_id = ? AND (label = ? OR label = ?) LIMIT 1"
-                )
-                .bind(target_graph_id)
-                .bind(&matched_at)
-                .bind(&norm_host)
-                .fetch_optional(&mut **tx)
-                .await?;
-
-                let parent_id = parent_node.unwrap_or_else(|| root_node_id.clone().unwrap_or_default());
+                let parent_id = if let Some((sid, _)) = subdomain_cache.get(&norm_host) {
+                    sid.clone()
+                } else if let Some((sid, _)) = subdomain_cache.get(&matched_at) {
+                    sid.clone()
+                } else {
+                    let parent_node: Option<String> = sqlx::query_scalar(
+                        "SELECT id FROM nodes WHERE graph_id = ? AND (label = ? OR label = ?) LIMIT 1"
+                    )
+                    .bind(target_graph_id)
+                    .bind(&matched_at)
+                    .bind(&norm_host)
+                    .fetch_optional(&mut **tx)
+                    .await?;
+                    parent_node.unwrap_or_else(|| root_node_id.clone().unwrap_or_default())
+                };
 
                 let finding_id = Uuid::new_v4().to_string();
                 let desc = description.unwrap_or_else(|| matched_at.clone());
@@ -1651,14 +1663,15 @@ async fn insert_records_single_project(
 }
 
 fn validate_records_domain(
-    current_root_domain: &str,
+    project_domains: &[String],
     records: &[ParsedRecord],
 ) -> Result<(), ArgusError> {
+    let project_domains_lower: Vec<String> = project_domains.iter().map(|d| d.to_lowercase()).collect();
     let any_matches = records.iter().any(|rec| {
         if let Some(host) = get_record_host(rec) {
             let clean_host = normalize_hostname(&host);
             if !clean_host.is_empty() && !is_ip_address(&clean_host) {
-                return matches_root_domain(&clean_host, current_root_domain);
+                return project_domains_lower.iter().any(|domain| matches_root_domain(&clean_host, domain));
             }
         }
         false
@@ -1681,15 +1694,16 @@ fn validate_records_domain(
 }
 
 fn determine_target_domains(
-    current_root_domain: &str,
+    project_domains: &[String],
     records: &[ParsedRecord],
 ) -> Vec<String> {
-    let current_root_domain_lower = current_root_domain.to_lowercase();
+    let project_domains_lower: Vec<String> = project_domains.iter().map(|d| d.to_lowercase()).collect();
+    let default_domain = project_domains_lower.first().cloned().unwrap_or_default();
     let any_matches = records.iter().any(|rec| {
         if let Some(host) = get_record_host(rec) {
             let clean_host = normalize_hostname(&host);
             if !clean_host.is_empty() && !is_ip_address(&clean_host) {
-                return matches_root_domain(&clean_host, current_root_domain);
+                return project_domains_lower.iter().any(|domain| matches_root_domain(&clean_host, domain));
             }
         }
         false
@@ -1697,20 +1711,35 @@ fn determine_target_domains(
 
     records.iter().map(|rec| {
         if any_matches {
-            current_root_domain_lower.clone()
+            if let Some(host) = get_record_host(rec) {
+                let clean_host = normalize_hostname(&host);
+                for domain in &project_domains_lower {
+                    if matches_root_domain(&clean_host, domain) {
+                        return domain.clone();
+                    }
+                }
+            }
+            default_domain.clone()
         } else if let Some(host) = get_record_host(rec) {
             let clean_host = normalize_hostname(&host);
             if !clean_host.is_empty() && !is_ip_address(&clean_host) {
-                if matches_root_domain(&clean_host, current_root_domain) {
-                    current_root_domain_lower.clone()
+                let mut matched = None;
+                for domain in &project_domains_lower {
+                    if matches_root_domain(&clean_host, domain) {
+                        matched = Some(domain.clone());
+                        break;
+                    }
+                }
+                if let Some(m) = matched {
+                    m
                 } else {
                     get_root_domain(&clean_host)
                 }
             } else {
-                current_root_domain_lower.clone()
+                default_domain.clone()
             }
         } else {
-            current_root_domain_lower.clone()
+            default_domain.clone()
         }
     }).collect()
 }
@@ -1718,7 +1747,7 @@ fn determine_target_domains(
 async fn insert_records_into_graph(
     state: &AppState,
     pool: &sqlx::SqlitePool,
-    target_graph_id: &str,
+    _target_graph_id: &str,
     records: Vec<ParsedRecord>,
     app_handle: &tauri::AppHandle,
     file_name: &str,
@@ -1726,13 +1755,17 @@ async fn insert_records_into_graph(
     total_files: usize,
 ) -> Result<usize, ArgusError> {
     let now = Utc::now().to_rfc3339();
-    let current_root_domain: String = sqlx::query_scalar(
-        "SELECT root_domain FROM projects LIMIT 1"
+
+    // Fetch all graphs in this project database file to know our valid domains
+    let graphs: Vec<(String, String)> = sqlx::query_as::<_, (String, String)>(
+        "SELECT root_domain, id FROM graphs"
     )
-    .fetch_one(pool)
+    .fetch_all(pool)
     .await?;
 
-    validate_records_domain(&current_root_domain, &records)?;
+    let project_domains: Vec<String> = graphs.iter().map(|g| g.0.clone()).collect();
+
+    validate_records_domain(&project_domains, &records)?;
 
     let total_files_f = total_files as f32;
     let file_index_f = file_index as f32;
@@ -1751,12 +1784,14 @@ async fn insert_records_into_graph(
 
     // Group records by project/domain
     let mut project_groups: std::collections::HashMap<String, (sqlx::SqlitePool, String, Vec<ParsedRecord>)> = std::collections::HashMap::new();
-    project_groups.insert(
-        current_root_domain.to_lowercase(),
-        (pool.clone(), target_graph_id.to_string(), Vec::new()),
-    );
+    for (domain, gid) in &graphs {
+        project_groups.insert(
+            domain.to_lowercase(),
+            (pool.clone(), gid.clone(), Vec::new()),
+        );
+    }
 
-    let target_domains = determine_target_domains(&current_root_domain, &records);
+    let target_domains = determine_target_domains(&project_domains, &records);
 
     for (rec, target_domain) in records.into_iter().zip(target_domains) {
         let mut final_target_domain = target_domain;
@@ -1767,7 +1802,9 @@ async fn insert_records_into_graph(
                 }
                 Err(e) => {
                     eprintln!("Failed to find/create project for domain {}: {}", final_target_domain, e);
-                    final_target_domain = current_root_domain.to_lowercase();
+                    if let Some(first_domain) = project_domains.first() {
+                        final_target_domain = first_domain.to_lowercase();
+                    }
                 }
             }
         }
@@ -1860,14 +1897,14 @@ mod tests {
 
     #[test]
     fn test_determine_target_domains() {
-        let current_root = "target.com";
+        let current_root = vec!["target.com".to_string()];
 
         // Scenario 1: One matches, so all get mapped to current project
         let records = vec![
             ParsedRecord::Subdomain { hostname: "sub.target.com".to_string(), status_code: None },
             ParsedRecord::Subdomain { hostname: "other.com".to_string(), status_code: None },
         ];
-        let domains = determine_target_domains(current_root, &records);
+        let domains = determine_target_domains(&current_root, &records);
         assert_eq!(domains, vec!["target.com".to_string(), "target.com".to_string()]);
 
         // Scenario 2: None match, so they get routed normally
@@ -1875,27 +1912,27 @@ mod tests {
             ParsedRecord::Subdomain { hostname: "other.com".to_string(), status_code: None },
             ParsedRecord::Subdomain { hostname: "sub.another.com".to_string(), status_code: None },
         ];
-        let domains2 = determine_target_domains(current_root, &records2);
+        let domains2 = determine_target_domains(&current_root, &records2);
         assert_eq!(domains2, vec!["other.com".to_string(), "another.com".to_string()]);
     }
 
     #[test]
     fn test_validate_records_domain() {
-        let current_root = "stripchat.com";
+        let current_root = vec!["stripchat.com".to_string()];
 
         // Case 1: Matching domain subdomain -> Ok
         let recs1 = vec![
             ParsedRecord::Subdomain { hostname: "sub.stripchat.com".to_string(), status_code: None },
             ParsedRecord::Subdomain { hostname: "skybriz.com".to_string(), status_code: None },
         ];
-        assert!(validate_records_domain(current_root, &recs1).is_ok());
+        assert!(validate_records_domain(&current_root, &recs1).is_ok());
 
         // Case 2: Completely non-matching domain -> Error
         let recs2 = vec![
             ParsedRecord::Subdomain { hostname: "skybriz.com".to_string(), status_code: None },
             ParsedRecord::Subdomain { hostname: "sub.skybriz.com".to_string(), status_code: None },
         ];
-        let err = validate_records_domain(current_root, &recs2).unwrap_err();
+        let err = validate_records_domain(&current_root, &recs2).unwrap_err();
         if let ArgusError::Validation(msg) = err {
             assert_eq!(msg, "import reports of the projects domain");
         } else {
@@ -1904,13 +1941,13 @@ mod tests {
 
         // Case 3: Empty records -> Ok
         let recs3 = vec![];
-        assert!(validate_records_domain(current_root, &recs3).is_ok());
+        assert!(validate_records_domain(&current_root, &recs3).is_ok());
 
         // Case 4: Only IPs -> Ok (generic)
         let recs4 = vec![
             ParsedRecord::IpAddress { ip: "1.1.1.1".to_string(), host: None },
         ];
-        assert!(validate_records_domain(current_root, &recs4).is_ok());
+        assert!(validate_records_domain(&current_root, &recs4).is_ok());
     }
 
     #[test]

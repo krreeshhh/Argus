@@ -283,33 +283,66 @@ pub async fn node_get_endpoints(
     })
 }
 
+#[derive(Debug, serde::Serialize)]
+pub struct ProjectEndpointsResponse {
+    pub endpoints: Vec<Node>,
+    pub total_count: i64,
+}
+
 #[tauri::command]
 pub async fn project_get_all_endpoints(
     project_id: String,
     search_query: Option<String>,
+    offset: Option<i64>,
+    limit: Option<i64>,
     state: tauri::State<'_, AppState>,
-) -> Result<Vec<Node>, ArgusError> {
+) -> Result<ProjectEndpointsResponse, ArgusError> {
     let pool = get_db_pool(&state, &project_id).await?;
-    
-    let mut sql = "SELECT id, graph_id, type, label, status_code, ip, cdn, title, page_size, found_by, score, is_favorite, is_pinned, is_collapsed, parent_id, pos_x, pos_y, created_at FROM nodes WHERE type IN ('endpoint', 'jsfile')".to_string();
-    
     let q_str = search_query.as_deref().unwrap_or("").trim().to_lowercase();
-    let endpoints = if !q_str.is_empty() {
-        sql.push_str(" AND (lower(label) LIKE ? OR lower(title) LIKE ?)");
-        sql.push_str(" ORDER BY score DESC, label ASC LIMIT 1000");
-        sqlx::query_as::<_, Node>(&sql)
-            .bind(format!("%{}%", q_str))
-            .bind(format!("%{}%", q_str))
-            .fetch_all(&pool)
-            .await?
-    } else {
-        sql.push_str(" ORDER BY score DESC, label ASC LIMIT 1000");
-        sqlx::query_as::<_, Node>(&sql)
-            .fetch_all(&pool)
-            .await?
-    };
     
-    Ok(endpoints)
+    // 1. Query total count matching filters
+    let mut count_sql = "SELECT COUNT(*) FROM nodes WHERE type IN ('endpoint', 'jsfile')".to_string();
+    if !q_str.is_empty() {
+        count_sql.push_str(" AND (lower(label) LIKE ? OR lower(title) LIKE ?)");
+    }
+    
+    let mut count_query = sqlx::query_scalar::<_, i64>(&count_sql);
+    if !q_str.is_empty() {
+        count_query = count_query
+            .bind(format!("%{}%", q_str))
+            .bind(format!("%{}%", q_str));
+    }
+    let total_count = count_query.fetch_one(&pool).await?;
+
+    // 2. Query paginated endpoints
+    let mut select_sql = "SELECT id, graph_id, type, label, status_code, ip, cdn, title, page_size, found_by, score, is_favorite, is_pinned, is_collapsed, parent_id, pos_x, pos_y, created_at FROM nodes WHERE type IN ('endpoint', 'jsfile')".to_string();
+    
+    if !q_str.is_empty() {
+        select_sql.push_str(" AND (lower(label) LIKE ? OR lower(title) LIKE ?)");
+    }
+    
+    select_sql.push_str(" ORDER BY score DESC, label ASC LIMIT ? OFFSET ?");
+    
+    let limit_val = limit.unwrap_or(500);
+    let offset_val = offset.unwrap_or(0);
+    
+    let mut select_query = sqlx::query_as::<_, Node>(&select_sql);
+    if !q_str.is_empty() {
+        select_query = select_query
+            .bind(format!("%{}%", q_str))
+            .bind(format!("%{}%", q_str));
+    }
+    
+    select_query = select_query
+        .bind(limit_val)
+        .bind(offset_val);
+        
+    let endpoints = select_query.fetch_all(&pool).await?;
+
+    Ok(ProjectEndpointsResponse {
+        endpoints,
+        total_count,
+    })
 }
 
 #[tauri::command]

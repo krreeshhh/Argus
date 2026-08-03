@@ -83,12 +83,14 @@ export const CommandBar: React.FC = () => {
       return;
     }
     const timer = setTimeout(() => {
-      invoke<any[]>('project_get_all_endpoints', {
+      invoke<{ endpoints: any[]; total_count: number }>('project_get_all_endpoints', {
         projectId: activeProject.id,
-        searchQuery: searchQuery
+        searchQuery: searchQuery,
+        offset: 0,
+        limit: 10,
       })
       .then(res => {
-        setEndpoints(res || []);
+        setEndpoints(res?.endpoints || []);
       })
       .catch(err => {
         console.error('Error fetching endpoints:', err);
@@ -361,8 +363,11 @@ export const CommandBar: React.FC = () => {
       if (cy) {
         const el = cy.getElementById(selected.item.id);
         if (el.length > 0) {
-          cy.center(el);
-          cy.zoom(1.8);
+          cy.animate({
+            center: { eles: el },
+            zoom: 1.5,
+            duration: 300
+          });
         }
       }
     } else if (selected.type === 'endpoint') {

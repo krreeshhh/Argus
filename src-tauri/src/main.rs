@@ -24,6 +24,7 @@ fn main() {
             commands::project::project_delete,
             commands::project::project_export,
             commands::project::project_import,
+            commands::project::project_add_domain,
             // Import
             commands::import::import_parse_file,
             commands::import::import_parse_folder,

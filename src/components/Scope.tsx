@@ -333,8 +333,11 @@ export const Scope: React.FC = () => {
       if (cy) {
         const el = cy.getElementById(selectedNode.id);
         if (el.length > 0) {
-          cy.center(el);
-          cy.zoom(1.8);
+          cy.animate({
+            center: { eles: el },
+            zoom: 1.5,
+            duration: 300
+          });
         }
       }
     }
@@ -600,7 +603,7 @@ export const Scope: React.FC = () => {
             {/* ENDPOINTS */}
             <div style={sectionDividerStyle}>
               <div style={sectionHeaderStyle}>
-                ENDPOINTS ({selectedNodeEndpoints.length.toLocaleString()} / {selectedNodeEndpointsTotalCount.toLocaleString()})
+                ENDPOINTS ({selectedNodeEndpointsTotalCount.toLocaleString()})
               </div>
               <input
                 type="text"
