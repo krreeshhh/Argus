@@ -1,0 +1,68 @@
+mail1.go.stripchat.com : 
+v3.ext.stripchat.com : 
+test.id.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+mta38.stripchat.com : 88.208.19.38
+mta194-12.auth.stripchat.com : 185.196.194.12
+mta42.stripchat.com : 88.208.19.42
+wiki.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+login.ar.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+www.es.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+skyrator.fr.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+mta194-79.notice.stripchat.com : 185.196.194.79
+ja.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+m.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+white-label.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+mta194-19.notice.stripchat.com : 185.196.194.19
+mta194-71.auth.stripchat.com : 185.196.194.71
+mta33.stripchat.com : 88.208.19.33
+vr.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+preview.br.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+secure.br.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+downloads.go.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+d.stripchat.com : docs-storage-x01.stripchat.tech.
+mail2.go.stripchat.com : 
+mta.staging.stripchat.com : 86.62.36.127
+mail2.ja.stripchat.com : 
+trk.email.stripchat.com : mta45-143.email.stripchat.com.
+mta194-2.stripchat.com : 185.196.194.2
+www.creative.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+eu.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+mta194-80.notice.stripchat.com : 185.196.194.80
+forum.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+homepage3.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+ar.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+mta194-20.notice.stripchat.com : 185.196.194.20
+mta194-1.stripchat.com : 185.196.194.1
+mta194-72.auth.stripchat.com : 185.196.194.72
+mta194-62.stripchat.com : 185.196.194.62
+emt.stripchat.com : 77.93.84.52
+acp.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+help.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+app.fr.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+mail2.ita.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+private.ita.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+ns2.ja.stripchat.com : 
+emt-test.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+mta234.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+mta41.stripchat.com : 88.208.19.41
+static.ar.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+jenkins.br.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+blog.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+mta194-11.auth.stripchat.com : 185.196.194.11
+trk.emt.stripchat.com : 77.93.84.52
+mta34.stripchat.com : 88.208.19.34
+staging.ext.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+tr.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+docs.ja.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+beta.fr.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+stats.fr.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+websocket-sp-v6.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+mta194-61.stripchat.com : 185.196.194.61
+mta37.stripchat.com : 88.208.19.37
+prometheus.creative.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+mta45-143.email.stripchat.com : 45.139.207.143
+ru.wiki.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+dns2.go.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+ipv6.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+link.inbox.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+sentry-public.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused

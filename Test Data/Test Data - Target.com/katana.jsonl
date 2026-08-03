@@ -1,0 +1,2 @@
+{"timestamp":"2024-01-01T00:00:00Z","request":{"method":"GET","endpoint":"https://api.target.com/v1/users"},"response":{"status_code":401}}
+{"timestamp":"2024-01-01T00:00:01Z","request":{"method":"GET","endpoint":"https://api.target.com/v1/admin"},"response":{"status_code":403}}

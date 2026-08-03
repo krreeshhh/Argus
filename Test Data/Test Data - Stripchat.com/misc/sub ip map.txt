@@ -1,0 +1,267 @@
+el.stripchat.com : 104.17.117.12
+admin.fr.stripchat.com : 104.17.118.12
+mail1.go.stripchat.com : 
+monitor.stripchat.com : 104.17.117.12
+staging.it.stripchat.com : 104.17.118.12
+v3.ext.stripchat.com : 
+zh.stripchat.com : 104.17.118.12
+preview-stat.stripchat.com : 104.17.117.12
+remote.go.stripchat.com : 
+track.fr.stripchat.com : 104.17.118.12
+alpha.go.stripchat.com : 
+gateway.fr.stripchat.com : 104.17.118.12
+test.id.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+k4.stripchat.com : 104.17.118.12
+mta38.stripchat.com : 88.208.19.38
+trk.sender.stripchat.com : 104.17.117.12
+portal.ar.stripchat.com : 104.17.118.12
+wildcard.beta.stripchat.com : 104.17.118.12
+mta194-12.auth.stripchat.com : 185.196.194.12
+mta42.stripchat.com : 88.208.19.42
+wiki.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+blog.es.stripchat.com : 104.17.118.12
+chat.id.stripchat.com : 104.17.117.12
+external.de.stripchat.com : 104.17.117.12
+login.ar.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+www.es.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+skyrator.fr.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+top100.stripchat.com : 104.17.117.12
+azure.ext.stripchat.com : 
+ci.fr.stripchat.com : 104.17.118.12
+webmail.es.stripchat.com : 104.17.117.12
+preview-cdn.stripchat.com : 104.17.117.12
+ns3.stripchat.com : 104.17.117.12
+symposium.stripchat.com : 104.17.117.12
+ko.stripchat.com : 104.17.118.12
+email.stripchat.com : 
+alicefuxxx.stripchat.com : 104.17.118.12
+anal.stripchat.com : 104.17.118.12
+staging.stripchat.com : 
+store.fr.stripchat.com : 104.17.118.12
+resume.stripchat.com : 104.17.117.12
+uk.stripchat.com : 104.17.117.12
+click.creative.stripchat.com : 
+class.stripchat.com : 104.17.117.12
+mta194-79.notice.stripchat.com : 185.196.194.79
+demo.go.stripchat.com : 
+git.br.stripchat.com : 104.17.118.12
+ja.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+m.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+white-label.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+go.ita.stripchat.com : 104.17.117.12
+sw.stripchat.com : 104.17.117.12
+video.ita.stripchat.com : 104.17.118.12
+balancing.stripchat.com : 104.17.117.12
+mta194-19.notice.stripchat.com : 185.196.194.19
+trk.notify.stripchat.com : trk.emt.stripchat.com.
+pt.stripchat.com : 104.17.118.12
+aws.es.stripchat.com : 104.17.118.12
+go.ja.stripchat.com : 
+suggestions.stripchat.com : 104.17.117.12
+mta194-71.auth.stripchat.com : 185.196.194.71
+cloud.stripchat.com : 104.17.117.12
+control.stripchat.com : sc-firewall-private-vip.stripchat.tech.
+mail.br.stripchat.com : 104.17.118.12
+origin.creative.stripchat.com : 
+server1.stripchat.com : 104.17.118.12
+mta235.stripchat.com : 104.17.117.12
+mta33.stripchat.com : 88.208.19.33
+vr.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+preview.br.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+secure.br.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+downloads.go.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+c-us3.stripchat.com : 104.17.118.12
+d.stripchat.com : docs-storage-x01.stripchat.tech.
+cdne.stripchat.com : 104.17.117.12
+owa.go.stripchat.com : 
+pop3.stripchat.com : 104.17.118.12
+mail.stripchat.com : 
+www.stripchat.com : restricted.rpz.airtelspam.com.
+autoconfig.ja.stripchat.com : 
+downloads.it.stripchat.com : 104.17.117.12
+login.br.stripchat.com : 104.17.117.12
+mail2.go.stripchat.com : 
+www.id.stripchat.com : 104.17.118.12
+ns4.stripchat.com : 104.17.118.12
+beta.stripchat.com : 104.17.118.12
+external.br.stripchat.com : 104.17.117.12
+gcp.es.stripchat.com : 104.17.117.12
+mx.fr.stripchat.com : 104.17.117.12
+mta.staging.stripchat.com : 86.62.36.127
+maxxcams.com.stripchat.com : 104.17.118.12
+ns4.es.stripchat.com : 104.17.118.12
+stream.fr.stripchat.com : 104.17.118.12
+unauthorized.stripchat.com : 104.17.117.12
+de.stripchat.com : 104.17.118.12
+mail2.ja.stripchat.com : 
+test.br.stripchat.com : 104.17.117.12
+trk.email.stripchat.com : mta45-143.email.stripchat.com.
+ro.stripchat.com : 104.17.118.12
+sv.stripchat.com : 104.17.117.12
+shop.creative.stripchat.com : 
+a.stripchat.com : 104.17.118.12
+mta194-2.stripchat.com : 185.196.194.2
+trk.account.stripchat.com : trk.emt.stripchat.com.
+emt-fallback.stripchat.com : 104.17.117.12
+speedtest.stripchat.com : 104.17.117.12
+websocket-apps.stripchat.com : 104.17.118.12
+www.creative.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+eu.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+internal.creative.stripchat.com : 
+mx.go.stripchat.com : 
+pop.ar.stripchat.com : 104.17.118.12
+prod.es.stripchat.com : 104.17.118.12
+track.ja.stripchat.com : 
+video.es.stripchat.com : 104.17.117.12
+bn.stripchat.com : 104.17.117.12
+db.creative.stripchat.com : 
+hub.fr.stripchat.com : 104.17.118.12
+imap.go.stripchat.com : 
+stats.ita.stripchat.com : 104.17.118.12
+regione.stripchat.com : 104.17.118.12
+ns3.es.stripchat.com : 104.17.118.12
+grc2go.stripchat.com : 104.17.118.12
+mta221.stripchat.com : 104.17.118.12
+ed-tool.stripchat.com : 104.17.117.12
+ftp.br.stripchat.com : 104.17.118.12
+jp.stripchat.com : 104.17.117.12
+private.de.stripchat.com : 104.17.117.12
+news.stripchat.com : 104.17.117.12
+mta194-80.notice.stripchat.com : 185.196.194.80
+click.fr.stripchat.com : 104.17.117.12
+emt-old.stripchat.com : 104.17.118.12
+id.stripchat.com : 104.17.117.12
+forum.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+homepage3.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+ar.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+mta194-20.notice.stripchat.com : 185.196.194.20
+pxl.stripchat.com : emt.stripchat.com.
+autodiscover.es.stripchat.com : 104.17.118.12
+autodiscover.fr.stripchat.com : 104.17.118.12
+v2.fr.stripchat.com : 104.17.117.12
+c-eu3.stripchat.com : 104.17.118.12
+mta194-1.stripchat.com : 185.196.194.1
+mta194-72.auth.stripchat.com : 185.196.194.72
+es.stripchat.com : 104.17.118.12
+fr.stripchat.com : 104.17.118.12
+mta194-62.stripchat.com : 185.196.194.62
+int.de.stripchat.com : 104.17.118.12
+v3.ar.stripchat.com : 104.17.117.12
+emt.stripchat.com : 77.93.84.52
+account.it.stripchat.com : 104.17.117.12
+analytics.ja.stripchat.com : 
+c-eu2.stripchat.com : 104.17.117.12
+acp.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+help.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+app.fr.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+mail2.ita.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+private.ita.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+web6680.stripchat.com : 104.17.118.12
+media.ext.stripchat.com : 
+ns2.ja.stripchat.com : 
+no.stripchat.com : 104.17.117.12
+provincia.stripchat.com : 104.17.117.12
+emt-test.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+mta234.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+ext.stripchat.com : 104.17.118.12
+ita.stripchat.com : 104.17.118.12
+zabbix.stripchat.com : 104.17.118.12
+br.stripchat.com : 104.17.118.12
+cs.stripchat.com : 104.17.118.12
+emt-proxy.stripchat.com : 104.17.118.12
+mta244.stripchat.com : 104.17.118.12
+media.ja.stripchat.com : 
+private.ext.stripchat.com : 
+cse.stripchat.com : 104.17.118.12
+ramdas.stripchat.com : 104.17.117.12
+int.creative.stripchat.com : 
+store.ja.stripchat.com : 
+creator.stripchat.com : 104.17.117.12
+mta41.stripchat.com : 88.208.19.41
+analytics.br.stripchat.com : 104.17.117.12
+kayako.stripchat.com : 104.17.117.12
+static.ar.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+jenkins.br.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+blog.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+dns.fr.stripchat.com : 104.17.118.12
+internal.br.stripchat.com : 104.17.118.12
+ns2.stripchat.com : 104.17.118.12
+cdn.stripchat.com : 104.17.118.12
+mta194-11.auth.stripchat.com : 185.196.194.11
+trk.emt.stripchat.com : 77.93.84.52
+mta34.stripchat.com : 88.208.19.34
+staging.ext.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+tr.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+docs.ja.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+wildcard.maxxcams.com.stripchat.com : 104.17.118.12
+ww1.ar.stripchat.com : 104.17.118.12
+en.stripchat.com : 104.17.117.12
+sentry.stripchat.com : 104.17.118.12
+support.stripchat.com : stripchat.zendesk.com.
+vpn.es.stripchat.com : 104.17.117.12
+webpagetest.stripchat.com : 104.17.118.12
+it.stripchat.com : 104.17.117.12
+homepage1.stripchat.com : 104.17.117.12
+analytics.ita.stripchat.com : 104.17.117.12
+jenkins.fr.stripchat.com : 104.17.117.12
+2fzh.stripchat.com : 104.17.118.12
+fi.stripchat.com : 104.17.117.12
+gizmovr.stripchat.com : 104.17.118.12
+nl.stripchat.com : 104.17.117.12
+admin.es.stripchat.com : 104.17.117.12
+dns1.id.stripchat.com : 104.17.118.12
+gr.stripchat.com : 104.17.118.12
+live.it.stripchat.com : 104.17.117.12
+login.ja.stripchat.com : 
+mail.it.stripchat.com : 104.17.117.12
+v3.fr.stripchat.com : 104.17.118.12
+beta.fr.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+stats.fr.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+websocket-sp-v6.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+wildcard.stripchat.com : 104.17.118.12
+wildcard.pinkflamelive.com.stripchat.com : 104.17.117.12
+zt.stripchat.com : 104.17.117.12
+aire.stripchat.com : 104.17.118.12
+c-us1.stripchat.com : 104.17.118.12
+pl.stripchat.com : 104.17.117.12
+int.es.stripchat.com : 104.17.118.12
+club.stripchat.com : 104.17.117.12
+go.stripchat.com : 104.17.118.12
+mta194-61.stripchat.com : 185.196.194.61
+mta37.stripchat.com : 88.208.19.37
+dns1.fr.stripchat.com : 104.17.118.12
+gitlab.fr.stripchat.com : 104.17.117.12
+mail2.es.stripchat.com : 104.17.117.12
+sites.stripchat.com : 104.17.118.12
+u.stripchat.com : 104.17.117.12
+mail1.ar.stripchat.com : 104.17.117.12
+prometheus.creative.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+mta45-143.email.stripchat.com : 45.139.207.143
+ru.stripchat.com : 104.17.117.12
+stage.stripchat.com : 104.17.117.12
+origin.go.stripchat.com : 
+skyrator.creatives.stripchat.com : 104.17.118.12
+creative.stripchat.com : 104.17.118.12
+go.br.stripchat.com : 104.17.117.12
+bugaria.stripchat.com : 104.17.117.12
+win8.stripchat.com : 104.17.117.12
+hu.stripchat.com : 104.17.118.12
+da.stripchat.com : 104.17.118.12
+trk.e.stripchat.com : trk.emt.stripchat.com.
+info.stripchat.com : 
+click.id.stripchat.com : 104.17.117.12
+deploy.stripchat.com : 104.17.117.12
+media.id.stripchat.com : 104.17.118.12
+ru.wiki.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+dns2.go.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+ipv6.stripchat.com : ;; communications error to 192.168.1.1#53: timed out
+mx.stripchat.com : 
+fraud.stripchat.com : 104.17.117.12
+cz.stripchat.com : 104.17.117.12
+pinkflamelive.com.stripchat.com : 104.17.117.12
+test.creative.stripchat.com : 
+hr.stripchat.com : 104.17.118.12
+cdnl.stripchat.com : 104.17.118.12
+link.inbox.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+sentry-public.stripchat.com : ;; communications error to 192.168.1.1#53: connection refused
+th.stripchat.com : 104.17.118.12

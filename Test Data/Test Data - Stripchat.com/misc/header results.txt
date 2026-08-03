@@ -1,0 +1,165 @@
+https://balancing.stripchat.com : HTTP/2 403 
+https://cdnl.stripchat.com : HTTP/2 403 
+https://club.stripchat.com : HTTP/2 403 
+https://c-eu2.stripchat.com : HTTP/2 403 
+https://cse.stripchat.com : HTTP/2 403 
+https://c-eu3.stripchat.com : HTTP/2 403 
+https://c-us3.stripchat.com : http://account.it.stripchat.com : http://analytics.ita.stripchat.com : HTTP/1.1 403 Forbidden
+http://admin.es.stripchat.com : HTTP/1.1 403 Forbidden
+http://chat.id.stripchat.com : HTTP/1.1 403 Forbidden
+http://ci.fr.stripchat.com : HTTP/1.1 403 Forbidden
+http://beta.fr.stripchat.com : http://autodiscover.es.stripchat.com : http://autodiscover.fr.stripchat.com : HTTP/1.1 403 Forbidden
+http://click.fr.stripchat.com : HTTP/1.1 403 Forbidden
+http://admin.fr.stripchat.com : HTTP/1.1 403 Forbidden
+https://c-us1.stripchat.com : HTTP/2 403 
+https://anal.stripchat.com : HTTP/2 403 
+https://a.stripchat.com : HTTP/2 403 
+https://blog.stripchat.com : HTTP/2 403 
+https://ar.stripchat.com : HTTP/2 403 
+https://cdne.stripchat.com : HTTP/2 403 
+https://class.stripchat.com : HTTP/2 403 
+https://cs.stripchat.com : HTTP/2 403 
+https://aire.stripchat.com : HTTP/2 403 
+http://click.id.stripchat.com : HTTP/1.1 403 Forbidden
+https://br.stripchat.com : HTTP/2 403 
+http://dns.fr.stripchat.com : HTTP/1.1 403 Forbidden
+http://dns1.fr.stripchat.com : HTTP/1.1 403 Forbidden
+http://dns1.id.stripchat.com : HTTP/1.1 403 Forbidden
+http://downloads.it.stripchat.com : HTTP/1.1 403 Forbidden
+https://de.stripchat.com : HTTP/2 403 
+https://da.stripchat.com : HTTP/2 403 
+https://deploy.stripchat.com : HTTP/2 403 
+https://emt-old.stripchat.com : http://external.de.stripchat.com : https://ed-tool.stripchat.com : HTTP/2 403 
+http://aws.es.stripchat.com : HTTP/1.1 403 Forbidden
+http://external.br.stripchat.com : HTTP/1.1 403 Forbidden
+http://blog.es.stripchat.com : HTTP/1.1 403 Forbidden
+https://en.stripchat.com : HTTP/2 403 
+https://fr.stripchat.com : HTTP/2 403 
+https://beta.stripchat.com : HTTP/2 403 
+http://ftp.br.stripchat.com : https://forum.stripchat.com : https://el.stripchat.com : HTTP/2 403 
+http://app.fr.stripchat.com : HTTP/1.1 403 Forbidden
+https://es.stripchat.com : HTTP/2 403 
+https://eu.stripchat.com : HTTP/2 403 
+http://gateway.fr.stripchat.com : HTTP/1.1 403 Forbidden
+http://gitlab.fr.stripchat.com : HTTP/1.1 403 Forbidden
+http://analytics.br.stripchat.com : https://fi.stripchat.com : HTTP/2 403 
+http://git.br.stripchat.com : HTTP/1.1 403 Forbidden
+https://bugaria.stripchat.com : HTTP/2 403 
+http://gcp.es.stripchat.com : HTTP/1.1 403 Forbidden
+https://alicefuxxx.stripchat.com : HTTP/2 403 
+https://emt-test.stripchat.com : HTTP/2 403 
+https://fraud.stripchat.com : HTTP/2 403 
+https://emt-fallback.stripchat.com : HTTP/2 403 
+http://go.br.stripchat.com : HTTP/1.1 403 Forbidden
+https://ext.stripchat.com : HTTP/2 403 
+http://go.ita.stripchat.com : HTTP/1.1 403 Forbidden
+https://cdn.stripchat.com : HTTP/2 403 
+https://cz.stripchat.com : HTTP/2 403 
+https://cloud.stripchat.com : HTTP/2 403 
+https://acp.stripchat.com : HTTP/2 403 
+https://creative.stripchat.com : HTTP/2 403 
+https://2fzh.stripchat.com : HTTP/2 403 
+https://gizmovr.stripchat.com : HTTP/2 403 
+https://creator.stripchat.com : HTTP/2 403 
+https://go.stripchat.com : HTTP/2 403 
+https://grc2go.stripchat.com : HTTP/2 403 
+https://help.stripchat.com : HTTP/2 403 
+https://gr.stripchat.com : HTTP/2 403 
+http://hub.fr.stripchat.com : https://homepage1.stripchat.com : http://int.es.stripchat.com : HTTP/1.1 403 Forbidden
+http://int.de.stripchat.com : HTTP/1.1 403 Forbidden
+http://internal.br.stripchat.com : HTTP/1.1 403 Forbidden
+https://homepage3.stripchat.com : HTTP/2 403 
+https://emt-proxy.stripchat.com : HTTP/2 403 
+https://hr.stripchat.com : HTTP/2 403 
+https://jp.stripchat.com : HTTP/2 403 
+https://ko.stripchat.com : HTTP/2 403 
+https://ja.stripchat.com : HTTP/2 403 
+http://jenkins.br.stripchat.com : HTTP/1.1 403 Forbidden
+https://hu.stripchat.com : HTTP/2 403 
+http://login.br.stripchat.com : HTTP/1.1 403 Forbidden
+http://live.it.stripchat.com : HTTP/1.1 403 Forbidden
+http://jenkins.fr.stripchat.com : HTTP/1.1 403 Forbidden
+https://kayako.stripchat.com : HTTP/2 403 
+http://login.ar.stripchat.com : HTTP/1.1 403 Forbidden
+https://ita.stripchat.com : HTTP/2 403 
+http://mail.it.stripchat.com : HTTP/1.1 403 Forbidden
+https://k4.stripchat.com : HTTP/2 403 
+https://it.stripchat.com : HTTP/2 403 
+http://mail.br.stripchat.com : http://mail1.ar.stripchat.com : http://mail2.es.stripchat.com : HTTP/1.1 403 Forbidden
+https://m.stripchat.com : HTTP/2 403 
+http://maxxcams.com.stripchat.com : HTTP/1.1 403 Forbidden
+https://ipv6.stripchat.com : HTTP/2 403 
+http://mail2.ita.stripchat.com : HTTP/1.1 403 Forbidden
+http://media.id.stripchat.com : https://bn.stripchat.com : https://monitor.stripchat.com : HTTP/2 403 
+http://mx.fr.stripchat.com : HTTP/1.1 403 Forbidden
+https://link.inbox.stripchat.com : https://mta244.stripchat.com : HTTP/2 403 
+http://ns3.es.stripchat.com : HTTP/1.1 403 Forbidden
+http://ns4.es.stripchat.com : HTTP/1.1 403 Forbidden
+https://mta221.stripchat.com : HTTP/2 403 
+https://nl.stripchat.com : HTTP/2 403 
+https://ns3.stripchat.com : https://news.stripchat.com : https://no.stripchat.com : HTTP/2 403 
+https://ns2.stripchat.com : HTTP/2 403 
+http://pop.ar.stripchat.com : HTTP/1.1 403 Forbidden
+https://ns4.stripchat.com : HTTP/2 403 
+http://pinkflamelive.com.stripchat.com : http://portal.ar.stripchat.com : https://id.stripchat.com : HTTP/2 403 
+http://preview.br.stripchat.com : HTTP/1.1 403 Forbidden
+http://private.de.stripchat.com : HTTP/1.1 403 Forbidden
+https://pl.stripchat.com : https://pop3.stripchat.com : http://private.ita.stripchat.com : HTTP/1.1 403 Forbidden
+http://prod.es.stripchat.com : HTTP/1.1 403 Forbidden
+https://preview-stat.stripchat.com : HTTP/2 403 
+https://preview-cdn.stripchat.com : HTTP/2 403 
+http://ru.wiki.stripchat.com : HTTP/1.1 403 Forbidden
+https://provincia.stripchat.com : HTTP/2 403 
+https://pt.stripchat.com : https://resume.stripchat.com : http://secure.br.stripchat.com : HTTP/1.1 403 Forbidden
+https://ramdas.stripchat.com : HTTP/2 403 
+https://ro.stripchat.com : https://ru.stripchat.com : http://skyrator.creatives.stripchat.com : HTTP/1.1 403 Forbidden
+http://skyrator.fr.stripchat.com : HTTP/1.1 403 Forbidden
+https://regione.stripchat.com : HTTP/2 403 
+https://sentry-public.stripchat.com : HTTP/2 403 
+https://server1.stripchat.com : HTTP/2 403 
+https://sentry.stripchat.com : http://staging.it.stripchat.com : https://sites.stripchat.com : HTTP/2 403 
+https://speedtest.stripchat.com : HTTP/2 403 
+http://static.ar.stripchat.com : HTTP/1.1 403 Forbidden
+http://stats.fr.stripchat.com : HTTP/1.1 403 Forbidden
+https://stage.stripchat.com : HTTP/2 403 
+http://stats.ita.stripchat.com : HTTP/1.1 403 Forbidden
+http://store.fr.stripchat.com : HTTP/1.1 403 Forbidden
+http://stream.fr.stripchat.com : HTTP/1.1 403 Forbidden
+http://test.br.stripchat.com : HTTP/1.1 403 Forbidden
+http://test.id.stripchat.com : HTTP/1.1 403 Forbidden
+https://suggestions.stripchat.com : HTTP/2 403 
+https://sv.stripchat.com : HTTP/2 403 
+http://track.fr.stripchat.com : https://sw.stripchat.com : https://symposium.stripchat.com : HTTP/2 403 
+https://trk.sender.stripchat.com : HTTP/2 403 
+https://th.stripchat.com : HTTP/2 403 
+https://top100.stripchat.com : HTTP/2 403 
+https://tr.stripchat.com : HTTP/2 403 
+http://v3.ar.stripchat.com : HTTP/1.1 403 Forbidden
+http://v2.fr.stripchat.com : HTTP/1.1 403 Forbidden
+http://v3.fr.stripchat.com : HTTP/1.1 403 Forbidden
+https://u.stripchat.com : HTTP/2 403 
+http://video.es.stripchat.com : HTTP/1.1 403 Forbidden
+http://video.ita.stripchat.com : HTTP/1.1 403 Forbidden
+http://vpn.es.stripchat.com : HTTP/1.1 403 Forbidden
+https://uk.stripchat.com : HTTP/2 403 
+http://webmail.es.stripchat.com : HTTP/1.1 403 Forbidden
+https://support.stripchat.com : HTTP/2 302 
+https://web6680.stripchat.com : HTTP/2 403 
+https://wildcard.beta.stripchat.com : HTTP/2 403 
+https://vr.stripchat.com : HTTP/2 403 
+https://webpagetest.stripchat.com : HTTP/2 403 
+https://websocket-apps.stripchat.com : HTTP/2 403 
+http://wildcard.maxxcams.com.stripchat.com : http://wildcard.pinkflamelive.com.stripchat.com : http://ww1.ar.stripchat.com : HTTP/1.1 403 Forbidden
+http://www.id.stripchat.com : HTTP/1.1 403 Forbidden
+https://websocket-sp-v6.stripchat.com : HTTP/2 403 
+http://www.es.stripchat.com : HTTP/1.1 403 Forbidden
+https://white-label.stripchat.com : HTTP/2 403 
+https://wiki.stripchat.com : HTTP/2 403 
+https://wildcard.stripchat.com : HTTP/2 403 
+https://win8.stripchat.com : HTTP/2 403 
+https://www.stripchat.com : https://zh.stripchat.com : HTTP/2 403 
+https://zabbix.stripchat.com : HTTP/2 403 
+https://zt.stripchat.com : HTTP/2 403 
+https://unauthorized.stripchat.com : HTTP/2 403 
+http://mta234.stripchat.com : HTTP/1.1 403 Forbidden
+http://mta235.stripchat.com : HTTP/1.1 403 Forbidden

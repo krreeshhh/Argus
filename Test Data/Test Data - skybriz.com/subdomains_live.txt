@@ -1,0 +1,4 @@
+https://payments.skybriz.com [404] [Google Cloud,Google Cloud CDN,Google Cloud Load Balancing,Google Cloud Trace,HTTP/3]
+https://www.skybriz.com [200] [Skybriz] [Cloudflare,Cloudflare Browser Insights,HTTP/3,MySQL,PHP,WordPress Block Editor,WordPress:7.0,jQuery,jQuery Migrate:3.4.1]
+https://skybriz.com [301] [301 Moved Permanently] [Cloudflare,Cloudflare Browser Insights,HTTP/3]
+https://staff.skybriz.com [404] [Cloudflare,Google Cloud,Google Cloud Trace,HSTS,HTTP/3]

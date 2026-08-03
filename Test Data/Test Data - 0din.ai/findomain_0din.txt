@@ -1,0 +1,12 @@
+static.0din.ai
+demo-scanner.0din.ai
+downloads.0din.ai
+scanner.0din.ai
+ws.scanner.0din.ai
+ctf.0din.ai
+ws.demo-scanner.0din.ai
+docs.0din.ai
+www.0din.ai
+ws.0din.ai
+0din.ai
+scorecard.0din.ai

@@ -1,0 +1,2 @@
+{"url":"https://api.target.com","status_code":200,"content_length":4821,"title":"API Gateway","tech":["nginx","Go"],"cdn_name":"cloudflare","host":"api.target.com","ip":"104.21.3.142"}
+{"url":"https://mail.target.com","status_code":403,"content_length":512,"title":"Webmail","tech":["Apache httpd"],"host":"mail.target.com","ip":"93.184.216.34"}

@@ -1,0 +1,3 @@
+{"host":"api.target.com","port":"443","input":"target.com","source":"certspotter"}
+{"host":"mail.target.com","port":"443","input":"target.com","source":"crtsh"}
+{"host":"dev.staging.target.com","port":"443","input":"target.com","source":"alienvault"}

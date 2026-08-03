@@ -1,0 +1,2 @@
+{"template-id":"cve-2021-44228","info":{"name":"Log4j RCE","severity":"critical","description":"Remote code execution via Log4j"},"matched-at":"https://api.target.com/login","type":"http"}
+{"template-id":"debug-endpoint-exposure","info":{"name":"Exposed Debug Endpoint","severity":"high"},"matched-at":"https://api.target.com/v1/debug","type":"http"}
