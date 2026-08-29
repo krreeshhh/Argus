@@ -9,6 +9,14 @@ pub mod commands;
 use state::AppState;
 
 fn main() {
+    #[cfg(target_os = "linux")]
+    {
+        // Fix for NVIDIA + WebKitGTK DMA-BUF / GBM buffer failure and blank screen on Linux
+        if std::env::var_os("WEBKIT_DISABLE_DMABUF_RENDERER").is_none() {
+            std::env::set_var("WEBKIT_DISABLE_DMABUF_RENDERER", "1");
+        }
+    }
+
     tauri::Builder::default()
         .manage(AppState::new())
         .plugin(tauri_plugin_shell::init())
